@@ -13,10 +13,22 @@ import java.util.Random;
  */
 public class ProcessamentoCPU extends javax.swing.JFrame {
 
-    Random randomico = new Random();
     Integer contador = 0;
-    Integer cpuMin = 0;
-            
+    Integer cpuMin = 100;
+    Integer cpuMax = 0;
+    Integer cpuMed = 0;
+    Integer cpuTotal = 0;
+    
+    Integer discoMin = 100;
+    Integer discoMax = 0;
+    Integer discoMed = 0;
+    Integer discoTotal = 0;
+    
+    Integer memoriaMin = 100;
+    Integer memoriaMax = 0;
+    Integer memoriaMed = 0;
+    Integer memoriaTotal = 0;
+    
     public ProcessamentoCPU() {
         initComponents();
     }
@@ -184,7 +196,7 @@ public class ProcessamentoCPU extends javax.swing.JFrame {
                                         .addComponent(lbMemoriaMax))))
                             .addComponent(pgbMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(199, 199, 199)
+                        .addGap(179, 179, 179)
                         .addComponent(btVerificar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -251,6 +263,60 @@ public class ProcessamentoCPU extends javax.swing.JFrame {
 
     private void btVerificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btVerificarActionPerformed
         // TODO add your handling code here:
+        contador++;
+        Random randomico = new Random();
+        Integer aleatorioCpu = randomico.nextInt(101);
+        Integer aleatorioDisco = randomico.nextInt(101);
+        Integer aleatorioMemoria = randomico.nextInt(101);
+        
+        cpuTotal = cpuTotal + aleatorioCpu;
+        discoTotal = discoTotal + aleatorioDisco;
+        memoriaTotal = memoriaTotal + aleatorioMemoria;
+        
+        cpuMed = cpuTotal/contador;
+        discoMed = discoTotal/contador;
+        memoriaMed = memoriaTotal/contador;
+        
+        pgbDisco.setValue(aleatorioDisco);
+        pgbDisco.setStringPainted(true);
+        
+        pgbCpu.setValue(aleatorioCpu);
+        pgbCpu.setStringPainted(true);
+        
+        pgbMemoria.setValue(aleatorioMemoria);
+        pgbMemoria.setStringPainted(true);   
+        
+        if(cpuMin>aleatorioCpu){
+            cpuMin = aleatorioCpu;
+        }
+        if(discoMin>aleatorioDisco){
+            discoMin = aleatorioDisco;
+        }
+        if(memoriaMin>aleatorioMemoria){
+            memoriaMin = aleatorioMemoria;
+        }
+        
+        if(cpuMax<aleatorioCpu){
+            cpuMax = aleatorioCpu;
+        }
+        if(discoMax<aleatorioDisco){
+            discoMax = aleatorioDisco;
+        }
+        if(memoriaMax<aleatorioMemoria){
+            memoriaMax = aleatorioMemoria;
+        }
+        
+        lbCpuMax.setText(String.format("%d%%", cpuMax));
+        lbCpuMed.setText(String.format("%d%%", cpuMed));
+        lbCpuMin.setText(String.format("%d%%", cpuMin));
+        
+        lbDiscoMax.setText(String.format("%d%%", discoMax));
+        lbDiscoMed.setText(String.format("%d%%", discoMed));
+        lbDiscoMin.setText(String.format("%d%%", discoMin));
+        
+        lbMemoriaMax.setText(String.format("%d%%", memoriaMax));
+        lbMemoriaMed.setText(String.format("%d%%", memoriaMed));
+        lbMemoriaMin.setText(String.format("%d%%", memoriaMin));
     }//GEN-LAST:event_btVerificarActionPerformed
 
     /**
